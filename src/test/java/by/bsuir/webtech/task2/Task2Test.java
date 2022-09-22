@@ -3,7 +3,7 @@ package by.bsuir.webtech.task2;
 import by.bsuir.webtech.task2.model.Point;
 import by.bsuir.webtech.task2.model.Rectangle;
 import by.bsuir.webtech.task2.service.CoordinatePlateService;
-import org.junit.jupiter.api.Assertions;
+import by.bsuir.webtech.task2.writer.ResultWriter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,6 +18,7 @@ class Task2Test {
 
     private final CoordinatePlateService coordinatePlateService =
             new CoordinatePlateService();
+    private final ResultWriter resultWriter = new ResultWriter();
 
     private final List<Rectangle> checkedArea = List.of(
             new Rectangle(new Point(-4.0, 5.0), new Point(4.0, 0.0)),
@@ -37,6 +38,7 @@ class Task2Test {
     @DisplayName("Check if point inside area:")
     void checkIfPointInsideArea(Point checkingPoint, boolean result) {
         boolean isPointInsideArea = coordinatePlateService.isPointInsideArea(checkingPoint, checkedArea);
+        resultWriter.printResult(checkingPoint, isPointInsideArea);
 
         assertEquals(result, isPointInsideArea);
     }
