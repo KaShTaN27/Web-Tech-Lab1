@@ -1,6 +1,7 @@
 package by.bsuir.webtech.task1;
 
 import by.bsuir.webtech.task1.service.MathService;
+import by.bsuir.webtech.task1.writer.ResultWriter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class Task1Test {
 
     private final MathService mathService = new MathService();
+    private final ResultWriter resultWriter = new ResultWriter();
 
     private static Stream<Arguments> paramXAndParamYAndResult() {
         return Stream.of(
@@ -29,6 +31,7 @@ class Task1Test {
     @DisplayName("Calculate fraction if")
     void calculateFraction(Double x, Double y, Double result, String displayingName) {
         double fractionResult = mathService.countFraction(x, y);
+        resultWriter.printFractionResult(fractionResult);
 
         assertEquals(result, Math.round(fractionResult * 1000) / 1000.0);
     }
